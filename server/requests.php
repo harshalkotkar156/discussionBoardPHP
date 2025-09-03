@@ -20,7 +20,11 @@
     // execute
     if ($stmt->execute()) {
         echo "new user added<br>";
-        $_SESSION['user'] = ["username"=>$username , "emailid"=>$emailid];
+        $_SESSION["user"] = ["username"=>$username , "emailid"=>$emailid];
+        header("Location: /test/discussionboardphp");
+        exit; // always good to stop further execution
+
+
     } else {
         echo "error in adding new user: " . $stmt->error . "<br>";
     }
