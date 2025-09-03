@@ -1,0 +1,35 @@
+<?php
+
+    // echo "HElllo";
+    session_start();
+
+    include("../common/dbconfig.php");
+    if (isset($_POST['signup'])) {
+    $username = $_POST['username'];
+    $emailid  = $_POST['emailid'];
+    $password = $_POST['password'];
+    $address  = $_POST['address'];
+
+    // prepare statement with placeholders
+    $stmt = $conn->prepare("INSERT INTO `users` (`username`, `emailid`, `password`, `address`) VALUES (?, ?, ?, ?)");
+    
+    // bind parameters (ssss = 4 strings)
+    $id=NULL;
+    $stmt->bind_param("ssss",$username, $emailid, $password, $address);
+
+    // execute
+    if ($stmt->execute()) {
+        echo "new user added<br>";
+        $_SESSION['user'] = ["username"=>$username , "emailid"=>$emailid];
+    } else {
+        echo "error in adding new user: " . $stmt->error . "<br>";
+    }
+}
+else if(isset($_POST['login'])){
+        echo ($_POST['emailid']);echo "<br>";
+        echo ($_POST['password']);echo "<br>";
+    }else{
+
+    }
+
+?>
