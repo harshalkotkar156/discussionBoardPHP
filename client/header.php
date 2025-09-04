@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ?>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary margin-bottom-15">
   <div class="container-fluid">
     <a href="#" class="navbar-brand" >
         <img src="public/logo.png" alt="">
@@ -24,9 +24,16 @@ if (session_status() === PHP_SESSION_NONE) {
               <a class="nav-link" href="?login=true">Login</a>
             </li>
         <?php else: ?>
-            <li class="nav-item">
+             <li class="nav-item">
               <a class="nav-link" href="./server/requests.php?logout=true">Logout</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="?ask=true">Ask a Question</a>
+            </li>
+
+           
+
         <?php endif; ?>
         
         <li class="nav-item">

@@ -12,14 +12,16 @@
 <body>
     <?php
     session_start();
-
+    // echo "<pre>";
+    // print_r($_SESSION);
+    // echo "</pre>";
     include("./client/header.php");
     if (isset($_GET['signup']) && (!isset($_SESSION['user']['username']) || empty($_SESSION['user']['username']))) {
         include("./client/signup.php");
     } else if (isset($_GET['login']) && (!isset($_SESSION['user']['username']) || empty($_SESSION['user']['username']))) {
         include("./client/login.php");
-    } else {
-        // your default code
+    } else if(isset($_GET['ask'])) {
+        include("./client/ask.php");
     }
 
     ?>
