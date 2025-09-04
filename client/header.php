@@ -25,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </li>
         <?php else: ?>
             <li class="nav-item">
-              <a class="nav-link" href="?logout=true">Logout</a>
+              <a class="nav-link" href="./server/requests.php?logout=true">Logout</a>
             </li>
         <?php endif; ?>
         

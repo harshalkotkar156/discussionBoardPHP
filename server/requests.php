@@ -30,10 +30,39 @@
     }
 }
 else if(isset($_POST['login'])){
-        echo ($_POST['emailid']);echo "<br>";
-        echo ($_POST['password']);echo "<br>";
-    }else{
+        // echo ($_POST['emailid']);echo "<br>";
+        // echo ($_POST['password']);echo "<br>";
 
+        $emailid  = $_POST['emailid'];
+        $password = $_POST['password'];
+        $username ="";
+        $query = "select * from users where emailid = '$emailid' and password='$password'";// echo $query;
+        $res = $conn->query($query);
+
+        if($res->num_rows == 1){
+            foreach($res as $row){
+                $username = $row['username'];
+            }
+            echo $username;
+            echo "<br>";
+            $_SESSION['user']=["username"=>$username,"emaidid"=>$emailid];
+            header("Location: /test/discussionboardphp");
+
+        }else{
+            // echo $res->num_rows;
+            // echo "<br>";
+
+        }
+        // if()
+
+
+
+    }else if(isset($_GET['logout'])){
+        session_unset();
+        header("Location: /test/discussionboardphp");
+
+    }else{
+        echo "new user not registerd<br>";
     }
 
 ?>
