@@ -85,13 +85,6 @@ else if(isset($_POST['login'])){
         $description  = $_POST['description'];
         $categoryid = $_POST['category'];
         $userid = $_SESSION['user']['userid'];
-        
-        // echo $title;
-        // echo "<br>"; echo $description;
-        // echo "<br>"; echo $categoryid;
-        // echo "<br>"; echo $userid;
-        // echo "<br>";
-    // // prepare statement with placeholders
         $stmt = $conn->prepare("INSERT INTO `questions` (`title`, `description`, `categoryid`, `userid`) VALUES (?, ?, ?, ?)");
         
         // bind parameters (ssss = 4 strings)
@@ -109,6 +102,28 @@ else if(isset($_POST['login'])){
             echo "error in adding new question: " . $stmt->error . "<br>";
         }
         
+
+    }else if(isset($_POST['answer'])){
+        $answer = $_POST['answer'];
+        $question_id = $_POST['question_id'];
+        $userid = $_SESSION['user']['userid'];
+        $stmt = $conn->prepare("INSERT INTO `answers` (`answer`, `question_id`, `userid`) VALUES (?, ?, ?)");
+        
+        // bind parameters (ssss = 4 strings)
+        $id=NULL;
+        $stmt->bind_param("sss",$answer, $question_id, $userid);
+
+        // execute
+        if ($stmt->execute()) {
+            $newId = $conn->insert_id;
+            echo "Answer is added sucessfully<br>";
+            header("Location: /test/discussionboardphp?q-id=$question_id");
+            exit; // always good to stop further execution
+
+        } else {
+            echo "Answer is not sumitted " . $stmt->error . "<br>";
+        }
+
 
     }else{
         echo "new question not added<br>";

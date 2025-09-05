@@ -10,7 +10,7 @@
     if($conn->connect_error){
         die("Error occur");
     }else{
-        echo "Connection Successfull<br>";
+        // echo "Connection Successfull<br>";
     }
 
 
